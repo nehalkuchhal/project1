@@ -1,0 +1,114 @@
+
+Table client_detail {
+  client_id int [pk, increment] // auto-increment
+  full_name varchar
+  created_at timestamp
+  date_of_birth date
+  comments varchar
+}
+
+Table education {
+client_id int [pk, increment] // auto-increment 
+  10th varchar
+  12th varchar
+  undergrad varchar
+  postgrad varchar
+  diploma varchar
+}
+
+Table skills {
+client_id int [pk, increment]// auto-increment 
+  skills text
+}
+
+Table experience {
+client_id int [pk, increment] // auto-increment 
+experience text
+}
+
+Table trainings {
+client_id int [pk, increment] // auto-increment 
+trainings text
+}
+
+Table projects {
+client_id int [pk, increment] // auto-increment 
+projects text                                                                                           
+}
+
+
+
+
+
+
+//Table postion_applied_for {
+  //postion_id int  [pk, increment]
+   //postions varchar
+ 
+//}
+
+
+
+
+Table profile_description {
+  client_id int
+  profile_id int
+}
+
+
+Table perks {
+profile_id int [pk, increment] // auto-increment 
+perks text                                                                                           
+}
+
+
+Table description {
+profile_id int [pk, increment] // auto-increment 
+description text                                                                                           
+}
+
+
+Table skills_required {
+profile_id int [pk, increment] // auto-increment 
+skills_required text                                                                                           
+}
+
+Table openings {
+  profile_id  int
+  intern int
+  junior_wd int
+  senior_wd int 
+}
+
+
+Table selection_process {
+profile_id int
+  assesment varchar
+  apptitude_test varchar
+  coding_test varchar
+  group_discussion varchar 
+  interview_rounds int 
+}
+
+
+Ref: "client_detail"."client_id" < "skills"."client_id"
+
+Ref: "education"."client_id" < "client_detail"."client_id"
+
+Ref: "client_detail"."client_id" < "projects"."client_id"
+
+Ref: "client_detail"."client_id" < "experience"."client_id"
+
+Ref: "client_detail"."client_id" < "trainings"."client_id"
+
+Ref: "client_detail"."client_id" < "profile_description"."client_id"
+
+Ref: "openings"."profile_id" < "profile_description"."profile_id"
+
+Ref: "openings"."profile_id" < "selection_process"."profile_id"
+
+Ref: "profile_description"."profile_id" < "description"."profile_id"
+
+Ref: "profile_description"."profile_id" < "perks"."profile_id"
+
+Ref: "profile_description"."profile_id" < "skills_required"."profile_id"
