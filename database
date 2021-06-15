@@ -1,88 +1,154 @@
 
-Table client_detail {
-  client_id int [pk, increment] // auto-increment
+Table applicant_detail {
+ applicant_id int [pk, increment] // auto-increment
   full_name varchar
+  mobile_no int
+  current_city varchar
+  education varchar
+  Jobs varchar
+  Internships varchar
+  Courses varchar
+  personal_poject varchar
+  Skills varchar
   created_at timestamp
-  date_of_birth date
   comments varchar
 }
 
 Table education {
-client_id int [pk, increment] // auto-increment 
-  10th varchar
-  12th varchar
-  undergrad varchar
-  postgrad varchar
-  diploma varchar
-}
-
-Table skills {
-client_id int [pk, increment]// auto-increment 
-  skills text
-}
-
-Table experience {
-client_id int [pk, increment] // auto-increment 
-experience text
-}
-
-Table trainings {
-client_id int [pk, increment] // auto-increment 
-trainings text
-}
-
-Table projects {
-client_id int [pk, increment] // auto-increment 
-projects text                                                                                           
-}
-
-
-
-
-
-
-//Table postion_applied_for {
-  //postion_id int  [pk, increment]
-   //postions varchar
+id int [pk, increment] // auto-increment
+  secondary varchar
+  senior_secondary varchar
+  Graduation varchar
+  PG varchar
+  Diploma varchar
+  Phd varchar
  
-//}
-
-
-
-
-Table profile_description {
-  client_id int
-  profile_id int
 }
 
 
-Table perks {
-profile_id int [pk, increment] // auto-increment 
-perks text                                                                                           
+Ref: "applicant_detail"."education" < "education"."id"
+
+Table school {
+id int [pk, increment] // auto-increment
+  Pursuing  boolean
+  Completed  boolean
+  School varchar
+ year_of_completion varchar
+  board varchar
+  Cgpa int
+  percentage int
+ 
+}
+
+Table Higher_education {
+id int [pk, increment] // auto-increment
+  Pursuing  boolean
+  Completed  boolean
+  College varchar
+ year_of_completion varchar
+  Degree varchar
+  steam varchar
+  Cgpa int
+  percentage int
+}
+
+Ref: "education"."secondary" < "school"."id"
+
+Ref: "education"."senior_secondary" < "school"."id"
+
+Ref: "education"."Graduation" < "Higher_education"."id"
+
+Ref: "education"."PG" < "Higher_education"."id"
+
+Ref: "education"."Diploma" < "Higher_education"."id"
+
+Ref: "education"."Phd" < "Higher_education"."id"
+
+Table Job_Details {
+id int [pk, increment] // auto-increment
+  Profile varchar
+ organization varchar
+ work_from_home boolean
+ start_date date
+ end_date date
+ work_description text
+
+}
+
+Ref: "applicant_detail"."Jobs" < "Job_Details"."id"
+
+Table Internship_Details {
+id int [pk, increment] // auto-increment
+  Profile varchar
+ organization varchar
+ work_from_home boolean
+ start_date date
+ end_date date
+ work_description text
+
+}
+
+Ref: "applicant_detail"."Internships" < "Internship_Details"."id"
+
+Table Course_Details {
+id int [pk, increment] // auto-increment
+  course_name varchar
+ organization varchar
+ online boolean
+ start_date date
+ end_date date
+ description text
 }
 
 
-Table description {
-profile_id int [pk, increment] // auto-increment 
-description text                                                                                           
+Ref: "applicant_detail"."Courses" < "Course_Details"."id"
+
+Table Project_Details {
+id int [pk, increment] // auto-increment
+  Title varchar
+ start_date date
+ end_date date
+ description text
+ project_link varchar
 }
 
+Ref: "applicant_detail"."personal_poject" < "Project_Details"."id"
 
-Table skills_required {
-profile_id int [pk, increment] // auto-increment 
-skills_required text                                                                                           
+
+Table Skill_Level {
+id int [pk, increment] // auto-increment
+  Name varchar
+  Beginner boolean
+  Intermediate boolean
+  Advance boolean
+}
+Ref: "applicant_detail"."Skills" < "Skill_Level"."id"
+
+Table Details_of_Company {
+  id int [pk, increment] // auto-increment
+  About_company longtext
+  About_offered_oppurtunity longtext
+  Skill_required longtext
+  no_of_opening int
+  who_can_apply longtext
+  perks  longtext
+  selection_process varchar
+  additional_information longtext
 }
 
-Table openings {
-  profile_id  int
+Ref: "applicant_detail"."applicant_id" < "Details_of_Company"."id"
+
+Table opening_details {
+  id  int  [pk, increment] // auto-increment
   intern int
   junior_wd int
   senior_wd int 
 }
 
+Ref: "Details_of_Company"."no_of_opening" < "opening_details"."id"
 
-Table selection_process {
-profile_id int
+Table selection_detail {
+  id int [pk, increment] 
   assesment varchar
   apptitude_test varchar
   coding_test varchar
@@ -90,25 +156,4 @@ profile_id int
   interview_rounds int 
 }
 
-
-Ref: "client_detail"."client_id" < "skills"."client_id"
-
-Ref: "education"."client_id" < "client_detail"."client_id"
-
-Ref: "client_detail"."client_id" < "projects"."client_id"
-
-Ref: "client_detail"."client_id" < "experience"."client_id"
-
-Ref: "client_detail"."client_id" < "trainings"."client_id"
-
-Ref: "client_detail"."client_id" < "profile_description"."client_id"
-
-Ref: "openings"."profile_id" < "profile_description"."profile_id"
-
-Ref: "openings"."profile_id" < "selection_process"."profile_id"
-
-Ref: "profile_description"."profile_id" < "description"."profile_id"
-
-Ref: "profile_description"."profile_id" < "perks"."profile_id"
-
-Ref: "profile_description"."profile_id" < "skills_required"."profile_id"
+Ref: "Details_of_Company"."selection_process" < "selection_detail"."id"
