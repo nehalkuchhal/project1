@@ -2,16 +2,14 @@ from django.contrib import admin
 from .models import (
     School,
     Higher_Education,
-    Education,
-    applicant_detail,
-    Job,
-    Internship,
+    Applicant_Detail,
+    Experience,
     Course,
     Project,
-    skill,
+    Skill,
 #company models
-    Company_detail,
-    no_of_opening,
+    Company_Detail,
+    No_Of_Opening,
     Selection_Rounds
 )
 # Register your models here.
@@ -22,14 +20,12 @@ class SchoolInline(admin.TabularInline):
 class HigherEducationInline(admin.TabularInline):
     model  = Higher_Education    
 
-class EducationInline(admin.TabularInline):
-    model  = Education  
 
-class JobInline(admin.TabularInline):
-    model  = Job 
 
-class InternshipInline(admin.TabularInline):
-    model  = Internship  
+class ExperienceInline(admin.TabularInline):
+    model  = Experience 
+
+  
 
 class CourseInline(admin.TabularInline):
     model  = Course  
@@ -37,29 +33,28 @@ class CourseInline(admin.TabularInline):
 class ProjectInline(admin.TabularInline):
     model  = Project  
 
-class skillInline(admin.TabularInline):
-    model  = skill  
+class SkillInline(admin.TabularInline):
+    model  = Skill  
     
-@admin.register(applicant_detail)
+@admin.register(Applicant_Detail)
 class applicantdetailAdmin(admin.ModelAdmin):
     inlines =[
-        EducationInline,
+
         SchoolInline,
         HigherEducationInline,  
-        skillInline,
-        JobInline ,
-        InternshipInline,
+        SkillInline,
+        ExperienceInline,
         CourseInline,
         ProjectInline
     ]
 
 class no_ofopeningInline(admin.TabularInline):
-    model  = no_of_opening 
+    model  = No_Of_Opening 
 
 class SelectionInline(admin.TabularInline):
     model  = Selection_Rounds 
 
-@admin.register(Company_detail)
+@admin.register(Company_Detail)
 class CompanydetailAdmin(admin.ModelAdmin):
     inlines =[
        no_ofopeningInline,
