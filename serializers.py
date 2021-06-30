@@ -1,19 +1,24 @@
 from rest_framework import serializers
-from .models import Applicant_Detail, School, Experience, Higher_Education, Course, Project, Skill, Company_Detail, No_Of_Opening, Selection_Rounds
+from .models import (
+Applicant_Detail,
+Education_Type,
+Experience,
+Course, 
+Project,
+Skill,
+Company_Detail,
+No_Of_Opening,
+Selection_Rounds
+)
 
 class ApplicantDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant_Detail
         fields = '__all__'
 
-class SchoolSerializer(serializers.ModelSerializer):
+class EducationTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = School
-        fields = '__all__'
-
-class HigherSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Higher_Education
+        model = Education_Type
         fields = '__all__'
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -50,4 +55,3 @@ class SelectionRoundSerializer(serializers.ModelSerializer):
     class Meta:
         model = Selection_Rounds
         fields = '__all__'
-
