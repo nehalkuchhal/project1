@@ -1,23 +1,39 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from rest_framework import permissions
 from rest_framework import generics
-from .models import Applicant_Detail, School, Experience, Higher_Education, Course, Project, Skill, Company_Detail, No_Of_Opening, Selection_Rounds
-from .serializers import ApplicantDetailSerializer, SchoolSerializer, ExperienceSerializer, HigherSerializer, CourseSerializer, ProjectSerializer, SkillSerializer, CompanyDetailSerializer, OpeningSerializer, SelectionRoundSerializer
+
+from .model import (
+Applicant_Detail,
+Education_Type,
+Course, 
+Project,
+Skill,
+Company_Detail,
+Selection)
+
+from .serializers import(
+ApplicantDetailSerializer,
+EducationTypeSerializer,
+ExperienceSerializer,
+CourseSerializer,
+ProjectSerializer,
+SkillSerializer,
+ProjectSerializer,
+CompanyDetailSerializer,
+OpeningSerializer,
+SelectionRoundSerializer,
+)
 
 class ApplicantDetailView(generics.ListCreateAPIView):
     queryset = Applicant_Detail.objects.all()
     serializer_class = ApplicantDetailSerializer
     permission_classes = (permissions.AllowAny, )
 
-class SchoolView(generics.ListCreateAPIView):
-    queryset = School.objects.all()
-    serializer_class = SchoolSerializer
+class EducationTypeView(generics.ListCreateAPIView):
+    queryset = Education_Type.objects.all()
+    serializer_class = EducationTypeSerializer
     permission_classes = (permissions.AllowAny, )
 
-class HigherView(generics.ListCreateAPIView):
-    queryset = Higher_Education.objects.all()
-    serializer_class = HigherSerializer
-    permission_classes = (permissions.AllowAny, )
 
 class ExperienceView(generics.ListCreateAPIView):
     queryset = Experience.objects.all()
