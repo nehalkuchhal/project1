@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import (
-    School,
-    Higher_Education,
+from .mrodels import (
+    Education_Type,
     Applicant_Detail,
     Experience,
     Course,
@@ -14,18 +13,12 @@ from .models import (
 )
 # Register your models here.
 
-class SchoolInline(admin.TabularInline):
-    model  = School
+class EducationTypeInline(admin.TabularInline):
+    model  = Education_Type
 
-class HigherEducationInline(admin.TabularInline):
-    model  = Higher_Education    
-
-
-
+   
 class ExperienceInline(admin.TabularInline):
     model  = Experience 
-
-  
 
 class CourseInline(admin.TabularInline):
     model  = Course  
@@ -39,9 +32,7 @@ class SkillInline(admin.TabularInline):
 @admin.register(Applicant_Detail)
 class applicantdetailAdmin(admin.ModelAdmin):
     inlines =[
-
-        SchoolInline,
-        HigherEducationInline,  
+        EducationTypeInline,  
         SkillInline,
         ExperienceInline,
         CourseInline,
@@ -60,3 +51,4 @@ class CompanydetailAdmin(admin.ModelAdmin):
        no_ofopeningInline,
        SelectionInline
     ]
+
