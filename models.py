@@ -1,19 +1,30 @@
 from django.db import models
 from datetime import datetime
 
+
 # Create your models here.
 
+Education_Choice = [
+    ('secondary', 'secondary'), 
+    ('senior_secondary', 'senior_secondary'), 
+    ('higher', 'higher'), 
+    ('pg', 'pg'), 
+    ('diploma', 'diploma'), 
+    ('phd', 'phd'), 
+]
+
+Degree_Choice = [
+    ('school', 'school'), 
+    ('higher_education', 'higher_education'), 
+     
+]
 
 class Applicant_Detail(models.Model):
     name = models.CharField( max_length=150)
     mobile_number = models.IntegerField(blank=False)
     current_city = models.CharField( max_length=50)
-    secondary = models.BooleanField(default=False)
-    senior_secondary = models.BooleanField(default=False)
-    higher = models.BooleanField(default=False)
-    pg = models.BooleanField(default=False)
-    diploma = models.BooleanField(default=False)
-    phd = models.BooleanField(default=False)
+    education = models.CharField(max_length=150 , choices=Education_Choice)
+    
     class Meta:
         verbose_name = (" Applicant_Detail")
         verbose_name_plural = ("Applicant_Details ")
@@ -22,14 +33,13 @@ class Applicant_Detail(models.Model):
     def __str__(self):
         return self.name
 
-class School(models.Model):
+class Education_Type(models.Model):
     applicant_name = models.ForeignKey(Applicant_Detail, on_delete=models.RESTRICT)
-    #Education = models.ForeignKey(Education, on_delete=models.RESTRICT)
+    education_type = models.CharField(max_length=150 , choices=Degree_Choice)
     pursuing = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
-    school_name = models.CharField(max_length=100)
+    name_of_organization = models.CharField(max_length=100)
     year_of_completion = models.IntegerField(blank = False)
-    board = models.CharField(max_length=50)
     cgpa = models.FloatField(blank = False)
     percentage =  models.IntegerField(blank = False)
 
@@ -38,27 +48,10 @@ class School(models.Model):
         verbose_name_plural = ("Schools")
 
     def __str__(self):
-        return self.school_name
+        return self.name_of_organization
 
 
-class Higher_Education(models.Model):
-    applicant_name = models.ForeignKey(Applicant_Detail, on_delete=models.RESTRICT)
-    #Education = models.ForeignKey(Education, on_delete=models.RESTRICT)
-    pursuing = models.BooleanField(default=False)
-    completed = models.BooleanField(default=False)
-    college_name = models.CharField(max_length=100)
-    year_of_completion = models.IntegerField(blank = False)
-    degree = models.CharField(max_length=50)
-    stream = models.CharField(max_length=50)
-    cgpa = models.FloatField(blank = False)
-    percentage =  models.IntegerField(blank = False)
 
-    class Meta:
-        verbose_name = ("Higher Education")
-        verbose_name_plural = ("Higher Education")
-
-    def __str__(self):
-        return self.college_name
 
 
 class Experience(models.Model):
@@ -140,7 +133,6 @@ class Selection_Rounds(models.Model):
     class Meta:
         verbose_name = (" Selection")
         verbose_name_plural = (" Selection")
-    
 
 
 
