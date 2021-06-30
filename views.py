@@ -2,16 +2,19 @@ from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from rest_framework import permissions
 from rest_framework import generics
 
-from .model import (
+from .models import (
 Applicant_Detail,
 Education_Type,
+Experience,
 Course, 
 Project,
 Skill,
+No_Of_Opening,
 Company_Detail,
-Selection)
+Selection_Rounds
+)
 
-from .serializers import(
+from .serializers import (
 ApplicantDetailSerializer,
 EducationTypeSerializer,
 ExperienceSerializer,
