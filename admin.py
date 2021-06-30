@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .mrodels import (
+from .models import (
     Education_Type,
     Applicant_Detail,
     Experience,
@@ -51,4 +51,5 @@ class CompanydetailAdmin(admin.ModelAdmin):
        no_ofopeningInline,
        SelectionInline
     ]
+
 
